@@ -36,6 +36,7 @@ const auth = async(req, res, next) => {
             } else {
                 req.body.userId=decode.userId;
                 req.body.userName=decode.userName;
+                console.log("auth hit and check userId and userName",req.body.userId,req.body.userName)
                 next();
             }
         });
