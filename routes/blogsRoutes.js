@@ -57,7 +57,7 @@ router.delete('/:id', auth, async (req, res) => {
     try {
         const blog = await Blog.findById(req.params.id);
         if (blog.author.toString() !== req.user.id) return res.status(401).json({ message: 'Not authorized' });
-
+        console.log(blog, "this is blog")
         await Blog.findByIdAndDelete(req.params.id);
         res.json({ message: 'Blog deleted' });
     } catch (error) {
