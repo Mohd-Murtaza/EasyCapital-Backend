@@ -6,12 +6,10 @@ const {auth} = require('../middlewares/authMiddleware');
 // Create Blog
 router.post('/', auth, async (req, res) => {
     const { title, description } = req.body;
-    console.log("on line 9----",req.body.userId,req.body.name)
 
     try {
         const user = await User.findById(req.body.userId);
         if (!user) return res.status(404).json({ message: 'User not found' });
-        console.log("user on line no 13",user)
         const newBlog = new Blog({
             title,
             description,
@@ -55,6 +53,7 @@ router.put('/:id', auth, async (req, res) => {
 
 // Delete Blog
 router.delete('/:id', auth, async (req, res) => {
+    console.log(req.params.id, "delete route hit for cheking id")
     try {
         const blog = await Blog.findById(req.params.id);
         if (blog.author.toString() !== req.user.id) return res.status(401).json({ message: 'Not authorized' });
