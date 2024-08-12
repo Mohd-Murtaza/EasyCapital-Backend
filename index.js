@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cookieParser());
 
-const allowedOrigins= ["http://localhost:5173","",""]
+const allowedOrigins= ["http://localhost:5173","https://easy-capital-backend.vercel.app","https://easy-capital-murtaza.netlify.app"]
 app.use(cors({
     origin:(origin,callback)=>{
         console.log("Origin is", origin);
