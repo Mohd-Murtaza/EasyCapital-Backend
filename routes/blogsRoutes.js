@@ -39,7 +39,7 @@ router.put('/:id', auth, async (req, res) => {
 
     try {
         const blog = await Blog.findById(req.params.id);
-        if (blog.author.toString() !== req.user.id) return res.status(401).json({ message: 'Not authorized' });
+        if (blog.author.toString() !== req.body.userId) return res.status(401).json({ message: 'Not authorized' });
 
         blog.title = title || blog.title;
         blog.description = description || blog.description;
@@ -56,7 +56,8 @@ router.delete('/:id', auth, async (req, res) => {
     console.log(req.params.id, "delete route hit for cheking id")
     try {
         const blog = await Blog.findById(req.params.id);
-        if (blog.author.toString() !== req.user.id) return res.status(401).json({ message: 'Not authorized' });
+        if (!blog) return res.status(404).json({ message: 'Blog not found' });
+        if (blog.author.toString() !== req.body.userId) return res.status(401).json({ message: 'Not authorized' });
         console.log(blog, "this is blog")
         await Blog.findByIdAndDelete(req.params.id);
         res.json({ message: 'Blog deleted' });
