@@ -23,7 +23,7 @@ const auth = async(req, res, next) => {
                             // Handle invalid or expired refresh token
                             return res.status(401).json({ msg: "Invalid or expired refresh token" });
                         }
-                            const accessToken = jwt.sign({userId:decode.userId,userName:decode.userName}, process.env.ACCESS_KEY, { expiresIn: "5m" });
+                            const accessToken = jwt.sign({userId:decode.userId,name:decode.name}, process.env.ACCESS_KEY, { expiresIn: "5m" });
                             res.cookie("accessToken",accessToken,cookieOptions);
                             console.log("create a access token again")
                             next();
@@ -35,8 +35,8 @@ const auth = async(req, res, next) => {
                 }
             } else {
                 req.body.userId=decode.userId;
-                req.body.userName=decode.userName;
-                console.log("auth hit and check userId and userName",req.body.userId,req.body.userName)
+                req.body.name=decode.name;
+                console.log("auth hit and check userId and name",req.body.userId,req.body.name)
                 next();
             }
         });

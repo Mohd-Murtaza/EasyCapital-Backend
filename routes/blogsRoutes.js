@@ -8,13 +8,13 @@ router.post('/', auth, async (req, res) => {
     const { title, description } = req.body;
 
     try {
-        const user = await User.findById(req.user.id);
+        const user = await User.findById(req.user.userId);
         if (!user) return res.status(404).json({ message: 'User not found' });
 
         const newBlog = new Blog({
             title,
             description,
-            author: req.user.id,
+            author: req.user.userId,
             authorName: user.name,
         });
         await newBlog.save();
