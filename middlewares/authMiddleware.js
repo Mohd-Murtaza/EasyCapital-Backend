@@ -23,7 +23,7 @@ const auth = async(req, res, next) => {
                             // Handle invalid or expired refresh token
                             return res.status(401).json({ msg: "Invalid or expired refresh token" });
                         }
-                            const accessToken = jwt.sign({userId:decode.userId,name:decode.name}, process.env.ACCESS_KEY, { expiresIn: "5m" });
+                            const accessToken = jwt.sign({userId:decode.userId,name:decode.name}, process.env.ACCESS_KEY, { expiresIn: "1h" });
                             res.cookie("accessToken",accessToken,cookieOptions);
                             console.log("create a access token again")
                             next();

@@ -58,7 +58,7 @@ router.post("/login", async (req, res) => {
               name: checkUserIsExist.name,
             },
             ACCESS_KEY,
-            { expiresIn: "5m" }
+            { expiresIn: "1h" }
           );
           const refreshToken = jwt.sign(
             {
@@ -66,7 +66,7 @@ router.post("/login", async (req, res) => {
               name: checkUserIsExist.name,
             },
             REFRESH_KEY,
-            { expiresIn: "1h" }
+            { expiresIn: "7h" }
           );
           res.cookie("accessToken", accessToken, cookieOptions);
           res.cookie("refreshToken", refreshToken, cookieOptions);
