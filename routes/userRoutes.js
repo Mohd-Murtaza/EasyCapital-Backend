@@ -76,6 +76,7 @@ router.post("/login", async (req, res) => {
             .send({
               msg: "user login successfully.",
               name: checkUserIsExist.name,
+              userId:checkUserIsExist._id,
               accessToken,
               refreshToken,
             });
