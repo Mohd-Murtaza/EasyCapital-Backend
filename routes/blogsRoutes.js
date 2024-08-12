@@ -9,13 +9,13 @@ router.post('/', auth, async (req, res) => {
     console.log("on line 9----",req.body.userId,req.body.name)
 
     try {
-        const user = await User.findById(req.user.userId);
+        const user = await User.findById(req.body.userId);
         if (!user) return res.status(404).json({ message: 'User not found' });
         console.log("user on line no 13",user)
         const newBlog = new Blog({
             title,
             description,
-            author: req.user.userId,
+            author: user._id,
             authorName: user.name,
         });
         await newBlog.save();
